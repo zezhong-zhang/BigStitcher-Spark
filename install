@@ -107,8 +107,21 @@ install_command () {
 	echo '' >> $1
 	echo "JAR=\$HOME/.m2/repository/net/preibisch/BigStitcher-Spark/${VERSION}/BigStitcher-Spark-${VERSION}.jar" >> $1
 	echo 'java \' >> $1
-	echo "  -Xmx${MEM}g -Dspark.master=local[${THREADS}] \\" >> $1
-#	echo '  -XX:+UseConcMarkSweepGC \' >> $1
+	echo "  -Xmx${MEM}g \\" >> $1
+	echo '  -Djava.security.manager=allow \' >> $1
+	echo '  --add-opens=java.base/java.nio=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/sun.nio.ch=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/java.lang=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/java.util=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/java.nio.direct=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/java.io=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/jdk.internal.ref=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED \' >> $1
+	echo '  --add-opens=java.base/sun.nio.ch=ALL-UNNAMED \' >> $1
+	echo '  --add-exports=java.base/sun.nio.ch=ALL-UNNAMED \' >> $1
+	echo '  --add-exports=java.base/jdk.internal.ref=ALL-UNNAMED \' >> $1
+	echo "  -Dspark.master=local[${THREADS}] \\" >> $1
 	echo -n '  -cp $JAR:' >> $1
 	echo -n $(cat cp.txt) >> $1
 	echo ' \' >> $1
