@@ -155,7 +155,7 @@ if [ $(pwd) == "$INSTALL_DIR" ]; then
 else
 	echo "Creating directory $INSTALL_DIR and moving files..."
     mkdir -p $INSTALL_DIR
-    mv affine-fusion resave detect-interestpoints match-interestpoints stitching solver create-fusion-container affine-fusion nonrigid-fusion split-images downsample clear-interestpoints clear-registrations transform-points $INSTALL_DIR/
+    mv resave detect-interestpoints match-interestpoints stitching solver create-fusion-container affine-fusion nonrigid-fusion split-images downsample clear-interestpoints clear-registrations transform-points $INSTALL_DIR/
 fi
 
 rm cp.txt
