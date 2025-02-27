@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  bigstitcher-spark:
+    image: bigstitcher-spark:latest
+    volumes:
+      - ${HOME}/.m2:/root/.m2  # Mount Maven repository
+      - /home/zzhang/Downloads/8_Sn:/data/input  # Mount input data
+    environment:
+      - SPARK_LOCAL_DIRS=/tmp
+      - SPARK_WORKER_DIR=/tmp
+      - SPARK_LOCAL_IP=127.0.0.1
+      - JAVA_OPTS=-Xmx64g
+      - SPARK_WORKER_MEMORY=64g
+      - SPARK_DRIVER_MEMORY=64g
+    working_dir: /data
+    command: ["-c", "stitching -x /data/input/dataset_raw.xml"]
+    network_mode: "host"
